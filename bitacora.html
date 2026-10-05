@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- METADATOS: describen la bitácora, mantienen SEO básico y aseguran adaptación responsive. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitácora · Eximia Code</title>
+  <meta name="description" content="Bitácora de desarrollo de Eximia Code: investigación, decisiones, implementación, dificultades, soluciones, pruebas, Pull Requests, aprendizaje y próximos pasos del TP1.">
+  <meta name="author" content="Grupo 12 · Eximia Code">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#00684D">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://tp1-grupo-12.vercel.app/bitacora.html">
+  <link rel="icon" type="image/webp" href="img/logo-96.webp">
+
+  <!-- OPEN GRAPH: mantiene una presentación coherente al compartir la bitácora. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Bitácora · Eximia Code">
+  <meta property="og:description" content="Proceso de investigación, implementación, pruebas e integración del Grupo 12.">
+  <meta property="og:url" content="https://tp1-grupo-12.vercel.app/bitacora.html">
+  <meta property="og:image" content="https://tp1-grupo-12.vercel.app/img/panel.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- TEMA: aplica la preferencia guardada antes del render para reducir el parpadeo visual. -->
+  <script>
+    try {
+      var t = localStorage.getItem('eximia-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+
+  <!-- TIPOGRAFÍAS E ICONOS: se mantienen las mismas fuentes e iconografía del sitio. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+  <!-- ESTILOS: la bitácora reutiliza la arquitectura modular del TP1. -->
+  <link rel="stylesheet" href="css/01-variables.css">
+  <link rel="stylesheet" href="css/02-base.css">
+  <link rel="stylesheet" href="css/03-layout.css">
+  <link rel="stylesheet" href="css/04-portada.css">
+  <link rel="stylesheet" href="css/05-perfil.css">
+  <link rel="stylesheet" href="css/06-formularios.css">
+  <link rel="stylesheet" href="css/07-bitacora.css">
+  <link rel="stylesheet" href="css/08-responsive.css">
+  <link rel="stylesheet" href="css/09-accesibilidad.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#bitacora-titulo">Saltar al contenido principal</a>
+
+  <!-- HEADER: la bitácora forma parte del sitio y conserva la navegación común. -->
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand-link" href="index.html" aria-label="Eximia Code, volver al inicio">
+        <img class="logo-img" src="img/logo-96.webp" width="44" height="44" alt="" decoding="async">
+        <span class="brand-name">Eximia Code</span>
+      </a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo oscuro">
+        <span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Modo oscuro</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+        <span aria-hidden="true">☰</span>
+      </button>
+      <ul class="nav-list" id="menu-principal">
+        <li><a href="index.html"><span aria-hidden="true">⌂</span><span>Inicio</span></a></li>
+        <li><a href="index.html#equipo"><span aria-hidden="true">♙</span><span>Equipo</span></a></li>
+        <li><a href="bitacora.html" aria-current="page"><span aria-hidden="true">▤</span><span>Bitácora</span></a></li>
+        <li><a href="index.html#contacto"><span aria-hidden="true">✉</span><span>Contacto</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+<!-- ANCHOR BAR -->
+<nav class="anchor-bar" aria-label="Navegación interna de la bitácora">
+  <div class="container">
+    <ul class="anchor-list">
+      <li><a href="#introduccion">Introducción</a></li>
+      <li><a href="#planificacion">Planificación</a></li>
+      <li><a href="#implementacion">Implementación</a></li>
+      <li><a href="#commits">Commits</a></li>
+      <li><a href="#pull-requests">Pull Requests</a></li>
+      <li><a href="#pruebas">Pruebas</a></li>
+      <li><a href="#aprendizajes">Aprendizajes</a></li>
+      <li><a href="#proximos-pasos">Próximos pasos</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <main id="contenido">
+    <!-- INTRODUCCIÓN: establece el método documental que se repite en cada etapa. -->
+    <section id="introduccion" class="section bitacora-hero" aria-labelledby="introduccion-titulo">
+      <div class="container">
+        <span class="eyebrow">Proceso · Grupo 12 · TP1</span>
+        <h1 id="bitacora-titulo" tabindex="-1">Bitácora de desarrollo</h1>
+        <p class="lead">Investigación → decisión → implementación → dificultad → solución → prueba → integración → aprendizaje.</p>
+        <div class="bitacora-summary" aria-label="Resumen del proceso">
+          <article><span class="summary-label">21–30/09</span><strong>Investigación</strong><p>Se definieron dominio, roles, identidad, arquitectura, navegación, responsive, accesibilidad, optimización e IA.</p></article>
+          <article><span class="summary-label">01–05/10</span><strong>Implementación</strong><p>Las decisiones se transformaron en código, perfiles, interacciones, formularios, multimedia y documentación.</p></article>
+          <article><span class="summary-label">Cierre</span><strong>Prueba + integración</strong><p>Se revisó la versión final y se relacionó el relato con ramas, commits, Pull Requests, README y evidencias.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTRO BREVE: responde directamente a la consigna de incluir registros del proceso. -->
+    <section class="section" aria-labelledby="registro-breve-titulo">
+      <div class="container">
+        <span class="eyebrow">Registro breve del proceso</span>
+        <h2 id="registro-breve-titulo">Qué hicimos, qué decidimos y qué resolvimos</h2>
+        <p>Este resumen funciona como una lectura rápida de la bitácora. Las secciones siguientes desarrollan cada etapa con mayor detalle y la relacionan con su evidencia técnica.</p>
+        <ol class="timeline">
+          <li>
+            <article>
+              <h3>1 · Definimos el problema y el concepto</h3>
+              <p><strong>Hicimos:</strong> retomamos la problemática de logística B2B y analizamos alternativas para el TP1. <strong>Decidimos:</strong> construir Eximia Code como empresa ficticia de software para mantener un mismo dominio entre materias.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>2 · Organizamos el trabajo del equipo</h3>
+              <p><strong>Hicimos:</strong> distribuimos roles según las fortalezas y áreas técnicas de cada integrante. <strong>Decidimos:</strong> que cada perfil tuviera una responsabilidad y una interacción relacionada con ese rol.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>3 · Diseñamos una base común</h3>
+              <p><strong>Hicimos:</strong> definimos identidad visual, arquitectura modular, navegación, responsive y accesibilidad. <strong>Resolvimos:</strong> el riesgo de que cinco perfiles parecieran sitios distintos mediante tokens, componentes y criterios compartidos.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>4 · Pasamos de la planificación a ramas independientes</h3>
+              <p><strong>Hicimos:</strong> distribuimos la implementación en ramas por integrante. <strong>Decidimos:</strong> integrar mediante Pull Requests para conservar responsables, cambios y contexto de cada incorporación.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>5 · Encontramos problemas durante la implementación</h3>
+              <p><strong>Resolvimos:</strong> overflow en pantallas pequeñas, carga innecesaria de multimedia, peso de imágenes, animaciones excesivas y estados de formularios. Cada problema se documenta junto con su solución y prueba.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>6 · Integramos y verificamos</h3>
+              <p><strong>Hicimos:</strong> revisamos responsive, teclado, foco, accesibilidad, formularios, multimedia, navegación y documentación. <strong>Decidimos:</strong> conservar una instantánea de commits para que la bitácora siga siendo legible aunque GitHub no responda.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>7 · Documentamos la trazabilidad</h3>
+              <p><strong>Hicimos:</strong> vinculamos etapas, responsables, commits y Pull Requests. <strong>Resultado:</strong> GitHub aporta la evidencia del cambio y esta página explica por qué se hizo y qué se aprendió.</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3>8 · Cerramos con aprendizajes y continuidad</h3>
+              <p><strong>Aprendimos:</strong> que modularidad, accesibilidad, rendimiento y control de versiones deben considerarse durante el desarrollo. <strong>Próximo paso:</strong> trasladar estos criterios al TP2.</p>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- MAPA DEL PROCESO: hace explícito qué tipo de evidencia aporta cada parte de la bitácora. -->
+    <section class="section alt" aria-labelledby="supera-titulo">
+      <div class="container">
+        <span class="eyebrow">Cómo leer esta página</span>
+        <h2 id="supera-titulo">Cómo está documentado el proceso</h2>
+        <p>La información está organizada para que el recorrido pueda leerse de forma rápida o profunda: primero el resumen, después las etapas de planificación e implementación y finalmente las evidencias, pruebas y aprendizajes.</p>
+        <div class="rubric-grid">
+          <article class="rubric-card"><span>01</span><h3>Proceso</h3><p>Existe una etapa previa de investigación y planificación antes del código.</p></article>
+          <article class="rubric-card"><span>02</span><h3>Decisiones</h3><p>Cada decisión relevante incluye análisis y justificación.</p></article>
+          <article class="rubric-card"><span>03</span><h3>Dificultades</h3><p>Los problemas no se ocultan: se explican junto con sus soluciones.</p></article>
+          <article class="rubric-card"><span>04</span><h3>Responsables</h3><p>Durante la implementación se identifica quién desarrolló cada bloque.</p></article>
+          <article class="rubric-card"><span>05</span><h3>Evidencia</h3><p>Las etapas de implementación se relacionan con commits y Pull Requests.</p></article>
+          <article class="rubric-card"><span>06</span><h3>Pruebas</h3><p>Se documentan responsive, teclado, accesibilidad, formularios, multimedia y overflow.</p></article>
+          <article class="rubric-card"><span>07</span><h3>Integración</h3><p>La Bitácora diferencia el trabajo de cada rama de la integración en <code>main</code>.</p></article>
+          <article class="rubric-card"><span>08</span><h3>Aprendizaje</h3><p>Cada etapa termina con lo aprendido y conecta con la siguiente.</p></article>
+          <article class="rubric-card"><span>09</span><h3>Documentación</h3><p>README, prompts, capturas y Bitácora complementan el historial técnico.</p></article>
+          <article class="rubric-card"><span>10</span><h3>Continuidad</h3><p>El cierre del TP1 identifica próximos pasos concretos para el TP2.</p></article>
+        </div>
+        <div class="supera-proof"><strong>Regla de trazabilidad:</strong><span>investigación → decisión → implementación → dificultad → solución → prueba → integración → aprendizaje.</span></div>
+      </div>
+    </section>
+
+    <!-- ETAPA PREVIA: demuestra que el proyecto fue pensado antes de iniciar la implementación visible en GitHub. -->
+    <section id="planificacion" class="section" aria-labelledby="planificacion-titulo">
+      <div class="container">
+        <span class="eyebrow">21–30 de septiembre de 2026 · Etapa previa</span>
+        <h2 id="planificacion-titulo">Investigación y planificación</h2>
+        <p>Esta etapa corresponde al trabajo de análisis y organización realizado en el grupo de Whatsapp antes de comenzar la implementación registrada en GitHub, con intercambios de opiniones de todo el grupo para llegar a un consenso. Su función es explicar el origen de las decisiones técnicas posteriores.</p>
+
+        <div class="stage-stack">
+          <article class="stage-card"><header><span class="stage-number">00</span><div><p class="stage-date">21–22/09</p><h3>Investigación y definición del proyecto</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Había que definir un estilo, producto y una problemática para el TP1. Pensamos en alternativas, entre ellas, relacionar el TP1 con el trabajo realizado en otras materias.</p></div><div><h4>Análisis</h4><p>Se retomó la problemática de logística B2B, distribución de productos gastronómicos refrigerados, pedidos, recorridos y trazabilidad.</p></div><div><h4>Decisión + justificación</h4><p>Se eligió <strong>Eximia Code</strong> como empresa ficticia de software para mantener un mismo dominio y relacionar Frontend, Ingeniería de Software y Backend</p></div><div><h4>Resultado + aprendizaje</h4><p>Quedó definido el contexto del sitio. El equipo comprobó que antes de programar debía comprender el problema que la interfaz iba a representar.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">01</span><div><p class="stage-date">22–23/09</p><h3>Definición de roles</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Los cinco integrantes necesitaban responsabilidades diferenciadas dentro de la empresa ficticia.</p></div><div><h4>Análisis</h4><p>Se relacionaron los perfiles personales con áreas técnicas que pudieran representarse también mediante una interacción.</p></div><div><h4>Decisión + justificación</h4><p>Fiorella: Product &amp; Frontend; Axel: Backend; Malena: UX/UI &amp; QA; Javier: Data &amp; Routing; Selene: DevOps &amp; Docs. Los roles servirían como base narrativa y técnica.</p></div><div><h4>Resultado + aprendizaje</h4><p>Cada perfil adquirió un propósito dentro de Eximia Code. Se decidió que JavaScript debía demostrar una responsabilidad y no ser una animación decorativa.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">02</span><div><p class="stage-date">22–24/09</p><h3>Identidad visual y Paleta Accesible (WCAG)</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Los cinco perfiles y los recursos visuales podían parecer sitios independientes, y la elección cromática debía garantizar contraste suficiente para todos los usuarios.</p></div><div><h4>Análisis</h4><p>Se buscaron criterios asociados a software B2B (logística y trazabilidad). Se evaluó el contraste bajo <strong>WCAG 2.1 AA</strong> y se adoptó la regla <strong>60-30-10</strong> para equilibrar fondos, componentes y focos de interacción.</p></div><div><h4>Decisión + justificación</h4><p>Se definió un orden de producción (<strong>logo → panel → avatares</strong>) y se centralizó la paleta en tokens CSS. En modo claro destaca <code>#070D1F</code> sobre <code>#FFFFFF</code> y en modo oscuro <code>#FFFFFF</code> sobre <code>#0B132B</code> (superando la relación 4.5:1). Para acciones y focos visibles de teclado se fijaron acentos de alto contraste (<code>#D9381E</code> / <code>#FFB703</code>) sin basar la información únicamente en el color.</p></div><div><h4>Dificultad → solución → resultado</h4><p>La dificultad fue mantener la coherencia visual entre recursos heterogéneos sin perder legibilidad en modo oscuro. Se ajustaron los bordes a <code>#6B829B</code> y se validó la composición y contraste de cada avatar antes de su integración. Resultado: un lenguaje visual común, unificado y totalmente accesible.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">03</span><div><p class="stage-date">23–25/09</p><h3>Arquitectura de archivos y CSS</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>El proyecto tendría portada, cinco perfiles, formularios, Bitácora, responsive, accesibilidad y múltiples interacciones.</p></div><div><h4>Análisis</h4><p>Se evaluó concentrar todo en un único CSS o separar responsabilidades.</p></div><div><h4>Decisión + justificación</h4><p>Se eligió una arquitectura modular: <code>01-variables.css</code>, <code>02-base.css</code>, <code>03-layout.css</code>, <code>04-portada.css</code>, <code>05-perfil.css</code>, <code>06-formularios.css</code>, <code>07-bitacora.css</code>, <code>08-responsive.css</code> y <code>09-accesibilidad.css</code>.</p></div><div><h4>Dificultad → solución → aprendizaje</h4><p>Separar demasiado también podía complicar el mantenimiento. Se asignó una responsabilidad clara a cada archivo. La arquitectura se convirtió en una herramienta de colaboración.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">04</span><div><p class="stage-date">24–26/09</p><h3>Arquitectura de navegación</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>El usuario no debía depender del botón Atrás del navegador para recorrer el sitio.</p></div><div><h4>Análisis</h4><p>Se definieron recorridos entre Inicio, Equipo, perfiles, secciones internas, contacto y regreso al equipo.</p></div><div><h4>Decisión + justificación</h4><p>Menú principal, skip-link, anchor bar, tarjetas, Inicio, Volver a equipo y Anterior/Siguiente. Cada mecanismo tendría una función diferente para evitar redundancias.</p></div><div><h4>Dificultad → solución → prueba</h4><p>La dificultad era ofrecer muchas rutas sin confundir. Se separaron sus funciones y se verificó que ningún recorrido importante dependiera del navegador.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">05</span><div><p class="stage-date">25–27/09</p><h3>Responsive y accesibilidad</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>El sitio debía adaptarse a 400, 900 y 1200 px sin perder jerarquía ni generar desplazamiento horizontal.</p></div><div><h4>Análisis</h4><p>Se identificaron como componentes sensibles el menú, grillas, tarjetas, formularios, imágenes y navegación de perfiles.</p></div><div><h4>Decisión + justificación</h4><p>Se utilizarían Grid, Flexbox, media queries, unidades relativas, <code>max-width</code> y reorganización de columnas. Se incorporaron foco visible, skip-link, ALT, labels, ARIA, <code>prefers-reduced-motion</code>, <code>prefers-contrast</code> y <code>forced-colors</code>.</p></div><div><h4>Dificultad → solución → prueba</h4><p>El riesgo principal era el overflow. Se planificó revisar cada breakpoint y el recorrido con Tab. El criterio de accesibilidad quedó incorporado desde el diseño, no como parche final.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">06</span><div><p class="stage-date">26–28/09</p><h3>Optimización de imágenes y multimedia</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Los avatares, posters, álbumes y recursos de portada podían aumentar innecesariamente el peso del sitio.</p></div><div><h4>Análisis</h4><p>Se evaluó el tamaño necesario según el contexto de uso y la densidad visual.</p></div><div><h4>Decisión + justificación</h4><p>WebP, versiones de 400 px, <code>srcset</code>, <code>sizes</code>, <code>loading="lazy"</code>, dimensiones explícitas y precarga cuando correspondiera.</p></div><div><h4>Dificultad → solución → aprendizaje</h4><p>Reducir demasiado la resolución afectaba calidad. Se mantuvieron fuentes de mayor resolución para contextos principales y versiones más pequeñas para tarjetas. Optimizar significó equilibrar peso y calidad.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">07</span><div><p class="stage-date">27–29/09</p><h3>Estructura común de perfiles</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Los cinco perfiles debían ser consistentes sin perder personalidad.</p></div><div><h4>Análisis</h4><p>Se definieron contenidos obligatorios y elementos de navegación compartidos.</p></div><div><h4>Decisión + justificación</h4><p>Presentación, avatar, nombre, ciudad, edad, rol, habilidades, películas, discos, contacto, GitHub, navegación e interacción.</p></div><div><h4>Dificultad → solución → resultado</h4><p>Para evitar repetición visual se mantuvo la estructura pero se personalizaron contenidos, recursos y demos. La plantilla conceptual facilitó el trabajo de los cinco integrantes.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">08</span><div><p class="stage-date">28–29/09</p><h3>Definición de interacciones JavaScript</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>La consigna exigía interacción dinámica en portada y en cada perfil.</p></div><div><h4>Análisis</h4><p>Se decidió que las demos debían explicar el rol de cada integrante.</p></div><div><h4>Decisión + justificación</h4><p>Fiorella: frontend/accesibilidad; Axel: backend/API; Malena: UX/UI/QA; Javier: datos/rutas; Selene: DevOps/documentación. El contenido dinámico se comunicaría con estados accesibles.</p></div><div><h4>Dificultad → solución → prueba</h4><p>Un único efecto habría sido repetitivo. Se definieron interacciones distintas y se comprobó su ejecución sin recargar la página.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">09</span><div><p class="stage-date">29/09</p><h3>IA y recursos visuales</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Se necesitaban recursos visuales consistentes y una documentación clara del uso de IA.</p></div><div><h4>Análisis</h4><p>Se evaluó el uso de IA para explorar logo, panel y avatares, manteniendo revisión humana.</p></div><div><h4>Decisión + justificación</h4><p>Proceso: <strong>generación → selección → revisión → adaptación → optimización → incorporación</strong>. Los prompts se documentaron aparte para conservar trazabilidad.</p></div><div><h4>Dificultad → solución → aprendizaje</h4><p>La generación automática podía introducir recursos incoherentes. Se revisaron legibilidad, contraste, relación con el rol, dimensiones y peso. La IA se utilizó como asistente, no como sustituto de la autoría.</p></div></div></article>
+
+          <article class="stage-card"><header><span class="stage-number">10</span><div><p class="stage-date">30/09</p><h3>Preparación colaborativa</h3><p class="stage-owner"><strong>Responsable:</strong> Equipo Eximia Code</p></div></header><div class="stage-grid"><div><h4>Problema / necesidad</h4><p>Cinco personas debían trabajar sobre un repositorio común sin perder trazabilidad, además, debíamos poder trabajar en horarios diferentes.</p></div><div><h4>Análisis</h4><p>Se revisó la distribución de responsabilidades y la necesidad de integrar cambios progresivamente.</p></div><div><h4>Decisión + justificación</h4><p>Se utilizaron ramas <code>feat/fiorella</code>, <code>feat/malena</code>, <code>feat/javier</code>, <code>feat/axel</code> y <code>feat/selene</code>, integradas mediante Pull Requests + MERGE.</p></div><div><h4>Dificultad → solución → aprendizaje</h4><p>Podían aparecer conflictos. La modularidad y la división de responsabilidades redujeron el acoplamiento. El control de versiones pasó a formar parte de la metodología del proyecto.</p></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPLEMENTACIÓN: cada integrante aparece con responsabilidad, dificultad, solución, pruebas y PR. -->
+    <section id="implementacion" class="section alt" aria-labelledby="implementacion-titulo">
+      <div class="container">
+        <span class="eyebrow">01–05 de octubre de 2026 · Implementación</span>
+        <h2 id="implementacion-titulo">De las decisiones al código</h2>
+        <p>A partir del 1 de octubre comienza el historial técnico visible en GitHub. En esta parte de la Bitácora se identifica explícitamente al responsable de cada implementación y se vincula el trabajo con commits y Pull Requests.</p>
+
+        <div class="stage-stack">
+          <article class="stage-card implementation-card"><header><span class="stage-number">11</span><div><p class="stage-date">01/10 · Fiorella</p><h3>Fiorella Alarcón — estructura, portada y primer perfil</h3><p class="stage-owner"><strong>Responsable de implementación:</strong> Fiorella Alarcón · Product &amp; Frontend Engineer</p></div></header><div class="stage-grid"><div><h4>Problema → análisis → decisión</h4><p>Había que crear una base reutilizable para que el resto del equipo pudiera continuar. Se decidió centralizar variables, tema, navegación, accesibilidad y componentes compartidos antes de sumar todos los perfiles.</p></div><div><h4>Implementación</h4><p>Se incorporaron estructura semántica, portada, navegación responsive, skip-link, tema claro/oscuro, demo de rutas, perfil de Fiorella, tarjetas clickeables e imágenes optimizadas.</p></div><div><h4>Dificultad → solución</h4><p>La base debía ser suficientemente estable sin bloquear a los demás. Se modularizaron CSS y JS y se utilizaron patrones reutilizables.</p></div><div><h4>Prueba → integración → aprendizaje</h4><p>Se revisaron navegación, foco, responsive y funcionamiento del perfil. El trabajo se integró mediante <strong>PR #1</strong>. Aprendizaje: una base común clara reduce retrabajo posterior.</p></div></div><div class="pr-box"><strong>Pull Request #1</strong><h4>feat: incorpora estructura base, portada y perfil de Fiorella</h4><p>Descripción: incorpora la base inicial del proyecto, portada, variables, navegación, accesibilidad, optimización de recursos, interacción de portada y perfil de Fiorella.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/1" target="_blank" rel="noopener noreferrer">Ver Pull Request #1 ↗</a></div></article>
+
+          <article class="stage-card implementation-card"><header><span class="stage-number">12</span><div><p class="stage-date">01/10 · Malena</p><h3>Malena Jasque — UX/UI, responsive y accesibilidad</h3><p class="stage-owner"><strong>Responsable de implementación:</strong> Malena Jasque · UX/UI &amp; QA</p></div></header><div class="stage-grid"><div><h4>Problema → análisis → decisión</h4><p>La base necesitaba consolidar su comportamiento visual en móvil, tablet y escritorio. Se decidió trabajar breakpoints explícitos y preferencias de accesibilidad.</p></div><div><h4>Implementación</h4><p>Se completaron estilos de header, menú, footer, portada, tarjetas, perfiles y formularios; se trabajaron 1200/900/400 px, foco, reduced motion, contraste, forced colors e impresión.</p></div><div><h4>Dificultad → solución</h4><p>Las grillas y navegación podían romperse en pantallas pequeñas. Se reorganizaron columnas, espacios, tipografías y controles según breakpoint.</p></div><div><h4>Prueba → integración → aprendizaje</h4><p>Se verificaron los tres tamaños y estados de accesibilidad. El trabajo se integró mediante <strong>PR #2</strong>. Aprendizaje: responsive y accesibilidad deben comprobarse como comportamiento, no solo como estilos.</p></div></div><div class="pr-box"><strong>Pull Request #2</strong><h4>feat: mejora UX/UI, responsive y agrega perfil de Malena</h4><p>Descripción: incorpora mejoras de UX/UI, accesibilidad y responsive junto con el perfil de Malena, recursos optimizados, formularios y preferencias de movimiento, contraste y color.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/2" target="_blank" rel="noopener noreferrer">Ver Pull Request #2 ↗</a></div></article>
+
+          <article class="stage-card implementation-card"><header><span class="stage-number">13</span><div><p class="stage-date">03/10 · Javier</p><h3>Javier Churquina — Data &amp; Routing y Spotify</h3><p class="stage-owner"><strong>Responsable de implementación:</strong> Javier Churquina · Data &amp; Routing</p></div></header><div class="stage-grid"><div><h4>Problema → análisis → decisión</h4><p>El perfil necesitaba representar datos y rutas y, además, ofrecer música sin penalizar la carga inicial. Se decidió cargar Spotify solamente cuando el usuario lo solicita.</p></div><div><h4>Implementación</h4><p>Se incorporaron perfil, interacción de Data &amp; Routing, recursos optimizados y Spotify bajo demanda.</p></div><div><h4>Dificultad → solución</h4><p>Cargar iframes multimedia desde el inicio podía consumir recursos innecesariamente. Se creó el iframe bajo demanda y se mantuvo una alternativa de búsqueda cuando no había identificador.</p></div><div><h4>Prueba → integración → aprendizaje</h4><p>Se comprobó que la reproducción se activa sólo al solicitarla y que la navegación permanece estable. Se integró mediante <strong>PR #3</strong>. Aprendizaje: el rendimiento también forma parte de la experiencia de usuario.</p></div></div><div class="pr-box"><strong>Pull Request #3</strong><h4>feat: incorpora integración de Spotify y perfil de Javier</h4><p>Descripción: incorpora el perfil de Javier, su interacción de Data &amp; Routing y la integración multimedia bajo demanda para evitar iframes innecesarios.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/3" target="_blank" rel="noopener noreferrer">Ver Pull Request #3 ↗</a></div></article>
+
+          <article class="stage-card implementation-card"><header><span class="stage-number">14</span><div><p class="stage-date">03/10 · Axel</p><h3>Axel Alva — Backend y formularios accesibles</h3><p class="stage-owner"><strong>Responsable de implementación:</strong> Axel Alva · Backend Developer</p></div></header><div class="stage-grid"><div><h4>Problema → análisis → decisión</h4><p>El formulario debía validar información, comunicar errores y confirmar el resultado sin sacar al usuario de la página. Se decidió utilizar validación del lado del cliente y envío AJAX.</p></div><div><h4>Implementación</h4><p>Se incorporaron perfil, interacción de Backend, validación, mensajes dinámicos, estados ARIA, gestión del foco y envío mediante FormSubmit AJAX.</p></div><div><h4>Dificultad → solución</h4><p>La experiencia debía comunicar estados sin depender de una recarga. Se añadieron mensajes de error, envío y confirmación, además de estado del botón y atributos accesibles.</p></div><div><h4>Prueba → integración → aprendizaje</h4><p>Se verificaron campos obligatorios, email, longitud mínima, estados y foco. Se integró mediante <strong>PR #4</strong>. Aprendizaje: la validación también debe ser comprensible para teclado y tecnologías de asistencia.</p></div></div><div class="pr-box"><strong>Pull Request #4</strong><h4>feat: incorpora formularios accesibles y perfil de Axel</h4><p>Descripción: incorpora el perfil de Axel, interacción de Backend, validación accesible y envío AJAX con mensajes dinámicos, ARIA, foco y control del estado del botón.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/4" target="_blank" rel="noopener noreferrer">Ver Pull Request #4 ↗</a></div></article>
+
+          <article class="stage-card implementation-card"><header><span class="stage-number">15</span><div><p class="stage-date">04/10 y 05/10 · Selene</p><h3>Selene Pais — DevOps, documentación y Bitácora</h3><p class="stage-owner"><strong>Responsable de implementación:</strong> Selene Pais · DevOps &amp; Docs</p></div></header><div class="stage-grid"><div><h4>Problema → análisis → decisión</h4><p>El proyecto necesitaba cerrar el proceso y hacer comprensible la evolución del trabajo. Se decidió integrar Bitácora, README, evidencias y el perfil de Selene como parte del mismo producto.</p></div><div><h4>Implementación</h4><p>Se incorporaron perfil e interacción de DevOps &amp; Docs, documentación de proceso, Bitácora, registro de ramas/commits/PR y próximos pasos.</p></div><div><h4>Dificultad → solución</h4><p>Documentar todo podía generar una página extensa y difícil de leer. Se organizó el contenido por etapas, tarjetas y bloques de evidencia, manteniendo una versión sin dependencia de la API de GitHub.</p></div><div><h4>Prueba → integración → aprendizaje</h4><p>Se revisaron navegación, legibilidad, responsive, historial y documentación final. El cierre documental se preparó para <strong>PR #5</strong>. Aprendizaje: documentar el proceso obliga a justificar decisiones y hace visible el aprendizaje del equipo.</p></div></div><div class="pr-box"><strong>Pull Request #5</strong><h4>docs: incorpora bitácora, documentación y perfil de Selene</h4><p>Descripción: incorpora el perfil de Selene, Bitácora, documentación, evidencias y cierre del proceso, conectando el relato con el historial del repositorio.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/5" target="_blank" rel="noopener noreferrer">Ver Pull Request #5 ↗</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFICULTADES TRANSVERSALES: resume problemas técnicos que afectaron a varias etapas. -->
+    <section class="section" aria-labelledby="problemas-titulo">
+      <div class="container">
+        <span class="eyebrow">Dificultades transversales</span>
+        <h2 id="problemas-titulo">Problema → análisis → solución → prueba</h2>
+        <div class="problem-list">
+          <article class="problem-card"><h3>Overflow horizontal</h3><p><strong>Problema:</strong> grillas, tablas o textos largos podían generar desplazamiento lateral. <strong>Solución:</strong> componentes con <code>min-width:0</code>, grids fluidas, <code>overflow-wrap:anywhere</code>, límites de ancho y, en el historial, tarjetas apilables en lugar de tablas anchas. <strong>Prueba:</strong> revisión a 400, 900 y 1200 px.</p></article>
+          <article class="problem-card"><h3>Historial de Git demasiado ancho</h3><p><strong>Problema:</strong> una tabla con muchas columnas podía convertirse en un cuadro con scroll horizontal. <strong>Solución:</strong> el historial se representa como tarjetas de commits, donde cada registro muestra fecha, responsable, tipo, título/descripción y enlace. <strong>Resultado:</strong> el historial puede leerse en móvil sin desplazamiento horizontal.</p></article>
+          <article class="problem-card"><h3>Imágenes sobredimensionadas</h3><p><strong>Problema:</strong> descargar siempre los originales aumentaba el peso. <strong>Solución:</strong> WebP, 400 px, <code>srcset</code> y <code>sizes</code>. <strong>Prueba:</strong> revisión visual y de dimensiones según contexto.</p></article>
+          <article class="problem-card"><h3>Animación excesiva</h3><p><strong>Problema:</strong> demasiada transición podía generar ruido o incomodidad. <strong>Solución:</strong> microinteracciones puntuales y <code>prefers-reduced-motion</code>. <strong>Prueba:</strong> desactivación de movimiento cuando el sistema lo solicita.</p></article>
+          <article class="problem-card"><h3>Multimedia pesada</h3><p><strong>Problema:</strong> iframes cargados desde el inicio. <strong>Solución:</strong> Spotify bajo demanda. <strong>Prueba:</strong> el reproductor se crea únicamente al solicitarlo.</p></article>
+          <article class="problem-card"><h3>Formulario sin recarga</h3><p><strong>Problema:</strong> se necesitaba comunicar estados sin abandonar la página. <strong>Solución:</strong> validación + <code>fetch</code> AJAX + ARIA + foco. <strong>Prueba:</strong> campos obligatorios, formato de email, longitud y mensajes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAZABILIDAD: aclara exactamente qué se puede encontrar al abrir cada evidencia. -->
+    <section class="section alt" aria-labelledby="trazabilidad-titulo">
+      <div class="container">
+        <span class="eyebrow">Historial verificable</span>
+        <h2 id="trazabilidad-titulo">Cómo leer la evidencia en GitHub</h2>
+        <div class="evidence-grid">
+          <article><h3>Historial de commits</h3><p>Al abrir un commit en GitHub se encuentra su <strong>título del commit</strong> y, cuando fue registrado con mensaje detallado, su <strong>descripción</strong>. La Bitácora explica el contexto y el objetivo del cambio.</p></article>
+          <article><h3>Pull Request</h3><p>Al abrir cada Pull Request se encuentra su <strong>título</strong> y su <strong>descripción</strong>, además de la integración de la rama correspondiente. La Bitácora relaciona esa integración con la etapa desarrollada.</p></article>
+          <article><h3>Ramas</h3><p>Las ramas <code>feat/fiorella</code>, <code>feat/malena</code>, <code>feat/javier</code>, <code>feat/axel</code> y <code>feat/selene</code> permiten identificar la responsabilidad de implementación.</p></article>
+          <article><h3>README + Bitácora</h3><p>El README funciona como guía técnica del producto; la Bitácora explica el proceso, las decisiones, dificultades, soluciones, pruebas y aprendizajes.</p></article>
+        </div>
+        <div class="process-note"><strong>Importante:</strong> la Bitácora no reemplaza GitHub. Cuando el lector entra al historial de un commit puede consultar directamente su título y descripción; cuando entra a un Pull Request puede consultar su título y descripción. La página aporta el contexto que conecta esas evidencias con el proceso.</div>
+      </div>
+    </section>
+
+    <!-- REGISTRO DINÁMICO: bitacora.js actualiza estos bloques desde GitHub cuando hay conexión. -->
+    <section id="commits" class="section" aria-labelledby="historial-titulo">
+      <div class="container">
+        <span class="eyebrow">Registro dinámico</span>
+        <h2 id="historial-titulo">Historial de commits</h2>
+        <p>La versión inicial contiene una instantánea legible. JavaScript actualiza los commits consultando GitHub cuando hay conexión y mantiene el registro documental si la API no responde. Los Pull Requests se conservan como evidencia editorial enlazada directamente a GitHub.</p>
+        <div class="log-filters" data-log-filters hidden aria-label="Filtros del historial">
+          <div class="field"><label for="log-persona">Responsable</label><select id="log-persona" name="persona"><option value="">Todos</option></select></div>
+          <div class="field"><label for="log-tipo">Tipo</label><select id="log-tipo" name="tipo"><option value="">Todos</option></select></div>
+          <button class="btn" type="button" data-log-reset>Restablecer</button>
+          <p class="log-count" data-log-count role="status" aria-live="polite"></p>
+        </div>
+        <p class="log-source" data-log-source>Instantánea documental del historial; JavaScript intentará actualizarla desde GitHub.</p>
+        <div class="commit-history" data-log-table aria-live="polite">
+          <article class="commit-card"><p class="commit-meta">01/10/2026 · Fiorella Alarcón · Función</p><h3>dcf842a · interacción dinámica de portada</h3><p><strong>Título:</strong> feat: incorpora interacción dinámica de portada</p><p><strong>Descripción:</strong> agrega la demo de optimización de rutas y estados dinámicos de la portada.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/dcf842a" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">01/10/2026 · Fiorella Alarcón · Función</p><h3>6f1ce4b · perfil de Fiorella</h3><p><strong>Título:</strong> feat: incorpora perfil de Fiorella y recursos optimizados</p><p><strong>Descripción:</strong> incorpora navegación interna, imágenes WebP, srcset/sizes y estructura completa del perfil.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/6f1ce4b" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">02/10/2026 · Malena Jasque · Estilos</p><h3>3bf1e72 · accesibilidad visual</h3><p><strong>Título:</strong> style: incorpora preferencias de accesibilidad visual</p><p><strong>Descripción:</strong> agrega reduced motion, contraste, forced colors, foco visible e impresión.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/3bf1e72" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">02/10/2026 · Malena Jasque · Estilos</p><h3>f353f4b · responsive 1200/900/400</h3><p><strong>Título:</strong> style: adapta responsive a 1200, 900 y 400 px</p><p><strong>Descripción:</strong> reorganiza grillas, navegación, formularios, tarjetas y espacios para los breakpoints definidos.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/f353f4b" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">03/10/2026 · Javier Churquina · Función</p><h3>43bcae1 · perfil y Data &amp; Routing</h3><p><strong>Título:</strong> feat: incorpora perfil de Javier y recursos optimizados</p><p><strong>Descripción:</strong> incorpora perfil semántico, interacción de Data &amp; Routing y recursos multimedia optimizados.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/43bcae1" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">03/10/2026 · Javier Churquina · Función</p><h3>8c15964 · Spotify bajo demanda</h3><p><strong>Título:</strong> feat: integra Spotify bajo demanda</p><p><strong>Descripción:</strong> crea el iframe sólo cuando se solicita y evita múltiples reproductores cargados de inicio.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/8c15964" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">04/10/2026 · Axel Alva · Función</p><h3>acc33a4 · perfil de Backend</h3><p><strong>Título:</strong> feat: incorpora perfil de Axel e interacción de Backend</p><p><strong>Descripción:</strong> incorpora el perfil, interacción dinámica y recursos optimizados.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/acc33a4" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+          <article class="commit-card"><p class="commit-meta">04/10/2026 · Axel Alva · Función</p><h3>02491c · formularios accesibles</h3><p><strong>Título:</strong> feat: incorpora validación y envío accesible de formularios</p><p><strong>Descripción:</strong> agrega validaciones, AJAX FormSubmit, mensajes dinámicos, ARIA, foco y estado del botón.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/commit/02491c" target="_blank" rel="noopener noreferrer">Abrir commit ↗</a></article>
+        </div>
+        <div class="testing-note"><h3>Qué aporta este cuadro</h3><p>El historial muestra el <strong>título y la descripción</strong> de cada cambio documentado y enlaza al registro correspondiente. Si GitHub está disponible, <code>bitacora.js</code> actualiza los registros con el historial real de las ramas configuradas; los Pull Requests permanecen enlazados desde sus tarjetas para conservar una lectura estable de las integraciones.</p></div>
+      </div>
+    </section>
+
+    <!-- PULL REQUESTS: resumen humano de las integraciones y sus descripciones. -->
+    <section id="pull-requests" class="section alt" aria-labelledby="prs-titulo">
+      <div class="container">
+        <span class="eyebrow">Integración</span>
+        <h2 id="prs-titulo">Pull Requests del proceso</h2>
+        <div class="pr-history">
+          <article class="pr-history-card"><span>PR #1</span><h3>feat: incorpora estructura base, portada y perfil de Fiorella</h3><p><strong>Responsable:</strong> Fiorella Alarcón</p><p><strong>Descripción:</strong> base del proyecto, portada, navegación, accesibilidad, optimización, interacción y primer perfil.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/1" target="_blank" rel="noopener noreferrer">Abrir PR #1 ↗</a></article>
+          <article class="pr-history-card"><span>PR #2</span><h3>feat: mejora UX/UI, responsive y agrega perfil de Malena</h3><p><strong>Responsable:</strong> Malena Jasque</p><p><strong>Descripción:</strong> mejoras de UX/UI, responsive, accesibilidad y perfil de Malena.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/2" target="_blank" rel="noopener noreferrer">Abrir PR #2 ↗</a></article>
+          <article class="pr-history-card"><span>PR #3</span><h3>feat: incorpora integración de Spotify y perfil de Javier</h3><p><strong>Responsable:</strong> Javier Churquina</p><p><strong>Descripción:</strong> perfil, Data &amp; Routing, multimedia y Spotify bajo demanda.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/3" target="_blank" rel="noopener noreferrer">Abrir PR #3 ↗</a></article>
+          <article class="pr-history-card"><span>PR #4</span><h3>feat: incorpora formularios accesibles y perfil de Axel</h3><p><strong>Responsable:</strong> Axel Alva</p><p><strong>Descripción:</strong> perfil Backend, validación, AJAX, ARIA, estados y gestión del foco.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/4" target="_blank" rel="noopener noreferrer">Abrir PR #4 ↗</a></article>
+          <article class="pr-history-card"><span>PR #5</span><h3>docs: incorpora bitácora, documentación y perfil de Selene</h3><p><strong>Responsable:</strong> Selene Pais</p><p><strong>Descripción:</strong> perfil de Selene, Bitácora, documentación, evidencias y cierre del proceso.</p><a href="https://github.com/fiorellaalarcon/tp1-grupo12/pull/5" target="_blank" rel="noopener noreferrer">Abrir PR #5 ↗</a></article>
+        </div>
+        <div class="process-note"><strong>Cómo comprobarlo:</strong> al abrir un Pull Request en GitHub se puede consultar su <strong>título y descripción</strong>, además de la rama de origen, los cambios y la integración. La Bitácora aporta el contexto pedagógico de cada integración.</div>
+      </div>
+    </section>
+
+    <!-- PRUEBAS: concentra las verificaciones finales y garantiza que la bitácora también documente el cierre. -->
+    <section id="pruebas" class="section" aria-labelledby="pruebas-titulo">
+      <div class="container">
+        <span class="eyebrow">Verificación final</span>
+        <h2 id="pruebas-titulo">Pruebas realizadas</h2>
+        <ul class="checklist">
+          <li class="check">✓ HTML5 semántico y navegación interna</li>
+          <li class="check">✓ Responsive en 400 / 900 / 1200 px</li>
+          <li class="check">✓ Sin desplazamiento horizontal intencional</li>
+          <li class="check">✓ Historial de commits sin cuadro horizontal en Bitácora</li>
+          <li class="check">✓ JavaScript en portada y perfiles</li>
+          <li class="check">✓ ALT, ARIA y foco visible</li>
+          <li class="check">✓ Skip-link y recorrido con Tab</li>
+          <li class="check">✓ Tema claro/oscuro</li>
+          <li class="check">✓ prefers-reduced-motion</li>
+          <li class="check">✓ prefers-contrast / forced-colors</li>
+          <li class="check">✓ Imágenes WebP optimizadas</li>
+          <li class="check">✓ Formularios con validación y estados</li>
+          <li class="check">✓ Spotify bajo demanda</li>
+          <li class="check">✓ Bitácora accesible desde el menú</li>
+        </ul>
+        <div class="testing-note"><h3>Resultado</h3><p>Se revisó la versión final en navegación, responsive, teclado, foco, tema, interacciones, formularios, multimedia, Bitácora y ausencia de overflow horizontal. El cuadro de commits fue diseñado como tarjetas apilables para que la documentación sea legible en móvil sin desplazamiento lateral.</p></div>
+      </div>
+    </section>
+
+    <!-- IA: documenta proceso y conserva el requisito de autoría del equipo. -->
+    <section class="section alt" aria-labelledby="ia-titulo">
+      <div class="container">
+        <span class="eyebrow">IA y autoría</span>
+        <h2 id="ia-titulo">Uso responsable de herramientas de IA</h2>
+        <div class="ai-process">
+          <article><span>1</span><h3>Generación</h3><p>Se utilizaron herramientas de IA como apoyo técnico y creativo para explorar alternativas.</p></article>
+          <article><span>2</span><h3>Selección</h3><p>El equipo evaluó las alternativas según identidad, legibilidad, utilidad y coherencia.</p></article>
+          <article><span>3</span><h3>Adaptación</h3><p>Los resultados se modificaron, optimizaron y adaptaron al código y al diseño real.</p></article>
+          <article><span>4</span><h3>Autoría</h3><p>La decisión final, implementación, pruebas y documentación corresponden al equipo.</p></article>
+        </div>
+        <div class="decision-box"><strong>Prompts</strong><p>Los prompts utilizados para logo, panel y avatares se conservan en <a href="docs/IA-PROMPTS.md">docs/IA-PROMPTS.md</a>.</p></div>
+        <p class="muted"><strong>Nota de precisión:</strong> la información de herramienta, modelo, plan y experiencia previa se registra con precisión de uso en el README.md. Utilizamos los planes gratuitos. Para las imágenes Nano Banana 2 (gemini-3.1-flash-image). para la asistencia de código/revisión ChatGPT — OpenAI, GPT-5.6 Luna</p>
+      </div>
+    </section>
+
+    <!-- CIERRE: resume el aprendizaje del TP1 y prepara el siguiente trabajo práctico. -->
+    <section id="aprendizajes" class="section" aria-labelledby="cierre-titulo">
+      <div class="container narrow-content">
+        <span class="eyebrow">Cierre del TP1</span>
+        <h2 id="cierre-titulo">Qué aprendimos</h2>
+        <p>Eximia Code permitió transformar una problemática previamente analizada en una experiencia frontend completa. El trabajo mostró que desarrollar una interfaz implica investigar, tomar decisiones, implementar, encontrar dificultades, resolverlas, probarlas e integrarlas.</p>
+        <p>La organización por ramas, commits y Pull Requests permitió distribuir responsabilidades y conservar trazabilidad. La Bitácora complementa ese historial explicando el motivo de las decisiones y el aprendizaje obtenido.</p>
+        <div class="closing-statement"><strong>La Bitácora registra el camino además del resultado.</strong><span>Investigación → decisión → implementación → dificultad → solución → prueba → integración → aprendizaje.</span></div>
+      </div>
+    </section>
+
+    <!-- PRÓXIMOS PASOS: conecta explícitamente el cierre del TP1 con el TP2. -->
+    <section id="proximos-pasos" class="section alt" aria-labelledby="tp2-titulo">
+      <div class="container">
+        <span class="eyebrow">Próximo desafío</span>
+        <h2 id="tp2-titulo">Próximos pasos · TP2</h2>
+        <div class="continuity-grid">
+          <article><h3>Migración a React</h3><p>Reorganizar la interfaz en componentes reutilizables, manteniendo la identidad visual y los criterios de accesibilidad aprendidos en TP1.</p></article>
+          <article><h3>Datos y componentes</h3><p>Separar contenidos de presentación mediante datos locales en JSON y componentes que permitan reutilizar perfiles, tarjetas y secciones.</p></article>
+          <article><h3>Búsqueda y filtros</h3><p>Incorporar herramientas de exploración de integrantes y contenidos, manteniendo estados claros y accesibles.</p></article>
+          <article><h3>Consumo de API</h3><p>Ampliar el concepto con una API pública y manejar estados de carga, éxito y error de forma comprensible.</p></article>
+          <article><h3>Calidad y pruebas</h3><p>Automatizar comprobaciones de enlaces, validaciones, accesibilidad y comportamiento responsive cuando la nueva arquitectura lo permita.</p></article>
+          <article><h3>Escalabilidad</h3><p>Conservar la experiencia adquirida en Git, documentación, rendimiento, UX/UI, accesibilidad y uso responsable de IA para construir una versión más mantenible.</p></article>
+        </div>
+        <div class="process-note"><strong>Continuidad:</strong> el TP2 no parte de cero. Parte de las decisiones, aprendizajes y criterios técnicos construidos durante este TP1.</div>
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN FINAL: mantiene tres salidas claras sin acciones redundantes. -->
+    <section class="section" aria-labelledby="navegacion-final-titulo">
+      <div class="container">
+        <h2 class="sr-only" id="navegacion-final-titulo">Navegación final</h2>
+        <nav class="profile-nav bitacora-final-nav" aria-label="Navegación de la bitácora">
+          <a class="card-link" href="index.html#equipo">Ver equipo</a>
+          <a class="card-link" href="index.html">Inicio</a>
+          <a class="card-link" href="#top">Volver arriba</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: conserva la navegación secundaria y el acceso de retorno. -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><strong>TP1 · Grupo 12 · Eximia Code</strong><div class="muted">© 2026 · Desarrollo web frontend · HTML5 + CSS3 + JavaScript</div></div>
+      <nav class="footer-links" aria-label="Navegación del pie">
+        <a href="index.html">Inicio</a><a href="index.html#equipo">Equipo</a><a href="bitacora.html">Bitácora</a><a href="index.html#contacto">Contacto</a>
+      </nav>
+      <div class="tech-badges"><span class="badge">HTML5 semántico</span><span class="badge">Responsive</span><span class="badge">ARIA + ALT</span></div>
+      <a class="footer-skip" href="#top">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script defer src="js/theme.js"></script>
+  <script defer src="js/skip-links.js"></script>
+  <script defer src="js/nav.js"></script>
+  <script src="js/bitacora.js" defer></script>
+</body>
+</html>
